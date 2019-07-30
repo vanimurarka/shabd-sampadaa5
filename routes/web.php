@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', array('as'=>'search', 'uses' => 'WebController@showIndex'));
+
+Route::get('x', function () {
+	return response('Hello World', 200)
+                  ->header('Content-Type', 'text/plain');
 });
