@@ -107,9 +107,9 @@ Word: <input name="word" type="text" value="{{$word}}">
 				@endif
 				
 			@endforeach
-			<div>{{$hiwordsHTML}}</div>
-			<div>{{$urwordsHTML}}</div>
-			<div>{{$enwordsHTML}}</div>
+			<div>{!!$hiwordsHTML!!}</div>
+			<div>{!!$urwordsHTML!!}</div>
+			<div>{!!$enwordsHTML!!}</div>
 		@else
 			<?php
 				$words = '';
