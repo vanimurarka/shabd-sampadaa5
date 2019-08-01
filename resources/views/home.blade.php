@@ -1,3 +1,16 @@
+@php
+
+if (!isset($word))
+	$word = '';
+if (!isset($synsets))
+	$synsets = '';
+if ((Auth::check()) && (Auth::user()['admin']==1))
+	$auth = true;
+else
+	$auth = false;
+
+@endphp
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,7 +74,7 @@
 <body>
 
 <h1>Shabd Sampadaa शब्द सम्पदा</h1>
-@if (Auth::check())
+@if ($auth)
     Welcome editing user<br/><br/>
 @endif
 
@@ -71,7 +84,6 @@ Word: <input name="word" type="text" value="{{$word}}">
 </form>
 
 {{$word}}<br/><br/>
-<?php $loggedIn = Auth::check(); ?>
 @if ($synsets != NULL)
 	<?php $wordid = 1 ?>
 	@foreach ($synsets as $synset)
@@ -82,7 +94,7 @@ Word: <input name="word" type="text" value="{{$word}}">
 				$enwordsHTML = '';
 			?>
 			@foreach ($synset->linkedwords as $word)
-				@if ($loggedIn)
+				@if ($auth)
 					@if ($word->language == 'ur')
 						<?php $urwordsHTML .= "<div style='display:inline-block;min-width:100px;background-color:white' class='word' id='word".$wordid."' onclick=".'"'."selectword('#word".$wordid++ ."');".'"'.">".$word->word."</div>";
 						?>
@@ -116,7 +128,7 @@ Word: <input name="word" type="text" value="{{$word}}">
 				$words = explode(', ', $synset->words);
 			?>
 			@foreach ($words as $synsetWord)
-				@if ($loggedIn)
+				@if ($auth)
 					<div style="display:inline-block;min-width:100px;background-color:white" id="word{{$wordid}}" class="word" onclick="selectword('{{'#word'.$wordid++}}');">{{$synsetWord}}</div>
 				@else
 					<div style="display:inline-block;min-width:100px;background-color:white" class="word">{{$synsetWord}}</div>
@@ -127,7 +139,7 @@ Word: <input name="word" type="text" value="{{$word}}">
 		{{$synset->sense}}
 		<br/><br/>
 	@endforeach
-	@if ($loggedIn)
+	@if ($auth)
 		<form method="GET" action="{{route('set-urdu')}}" id="set-urdu-form">
 		<input name="words" id="ur-selected-words" type="hidden">
 		<input class="submit" type="button" value="Mark Selected Words as Urdu" onclick="markUrdu();">

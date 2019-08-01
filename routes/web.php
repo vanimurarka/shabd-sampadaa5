@@ -17,7 +17,6 @@
 
 Route::get('/', array('as'=>'search', 'uses' => 'WebController@showIndex'));
 
-Route::get('x', function () {
-	return response('Hello World', 200)
-                  ->header('Content-Type', 'text/plain');
-});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
