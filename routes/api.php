@@ -51,6 +51,8 @@ Route::get('word', function(Request $request) {
     return response()->json($data);
 	    
 });
+Route::get('/set-urdu','DBEnhancer@setUrdu');
+Route::get('/set-english','DBEnhancer@setEnglish');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
