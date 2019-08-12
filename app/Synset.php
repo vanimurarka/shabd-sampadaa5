@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Log;
+use App\SynsetWord;
 
 class Synset extends Model
 {

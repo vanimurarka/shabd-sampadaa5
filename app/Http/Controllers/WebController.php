@@ -14,7 +14,8 @@ class WebController extends Controller
 		if ($word != NULL)
 	    {
 	        $utf = urlencode($word);
-	        $url = config('shabd-sampadaa.api-base-url')."word?word=".$utf;
+	        $apiKey = config('shabd-sampadaa.api-key');
+	        $url = config('shabd-sampadaa.api-base-url')."word/".$apiKey."?word=".$utf;
 	        $output = file_get_contents($url);
 	        $str = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
 	            return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
@@ -36,12 +37,13 @@ class WebController extends Controller
 		if ($words != NULL)
 	    {
 	    	$utf = urlencode($words);
-	        $url = config('shabd-sampadaa.api-base-url')."set-urdu?words=".$utf;
+	    	$apiKey = config('shabd-sampadaa.api-key');
+	        $url = config('shabd-sampadaa.api-base-url')."set-urdu/".$apiKey."?words=".$utf;
 	        $context = "";
 	        // $key = ApiKey::where('user_id', '=', Auth::user()->userid)->first();
 	        // $key = $key->key;
 	        // // var_dump($key);
-	        $key = '';
+	        $key = ''; // was used an earlier implementation
 	        $context = stream_context_create(array(
 	            'http' => array(
 	                'header'  => "X-Authorization: ".$key)
@@ -58,12 +60,13 @@ class WebController extends Controller
 		if ($words != NULL)
 	    {
 	    	$utf = urlencode($words);
-	        $url = config('shabd-sampadaa.api-base-url')."set-english?words=".$utf;
+	    	$apiKey = config('shabd-sampadaa.api-key');
+	        $url = config('shabd-sampadaa.api-base-url')."set-english/".$apiKey."?words=".$utf;
 	        $context = "";
 	        // $key = ApiKey::where('user_id', '=', Auth::user()->userid)->first();
 	        // $key = $key->key;
 	        // // var_dump($key);
-	        $key = '';
+	        $key = ''; // was used an earlier implementation
 	        $context = stream_context_create(array(
 	            'http' => array(
 	                'header'  => "X-Authorization: ".$key)

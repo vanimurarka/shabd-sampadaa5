@@ -15,12 +15,12 @@ use App\Synset;
 |
 */
 
-Route::get('/test', function () {
-    return response('Test API', 200)
-                  ->header('Content-Type', 'application/json');
-});
-
-Route::get('word', function(Request $request) {
+//SIMPLE API KEY AUTHENTICATION FROM
+// https://medium.com/@kevincristella/basic-token-based-api-authentication-with-laravel-aeed0050dd0d
+Route::get('/set-urdu/{api_token}', 'DBEnhancer@setUrdu')->middleware('api_token');
+Route::get('/set-english/{api_token}', 'DBEnhancer@setEnglish')->middleware('api_token');
+Route::get('/word/{api_token}', function(Request $request) 
+{
     $word = $request->input('word');
     // return mb_strpos($word, "ज़");
     $words = Word::findWord($word);
@@ -50,10 +50,9 @@ Route::get('word', function(Request $request) {
     }
     return response()->json($data);
 	    
-});
-Route::get('/set-urdu','DBEnhancer@setUrdu');
-Route::get('/set-english','DBEnhancer@setEnglish');
+})->middleware('api_token');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

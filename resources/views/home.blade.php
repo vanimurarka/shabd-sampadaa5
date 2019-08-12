@@ -120,8 +120,8 @@ Word: <input name="word" type="text" value="{{$word}}">
 				
 			@endforeach
 			<div>{!!$hiwordsHTML!!}</div>
-			<div>{!!$urwordsHTML!!}</div>
-			<div>{!!$enwordsHTML!!}</div>
+			<div>उर्दू से -- {!!$urwordsHTML!!}</div>
+			<div>अंग्रेजी से -- {!!$enwordsHTML!!}</div>
 		@else
 			<?php
 				$words = '';
