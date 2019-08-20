@@ -16,7 +16,8 @@ class Cors
     public function handle($request, Closure $next)
     {
         return $next($request)
-            ->header('Access-Control-Allow-Origin', "http://geet-gatiroop.manaskriti.com, http://localhost")
+            ->header('Access-Control-Allow-Origin', "http://geet-gatiroop.manaskriti.com")
+            ->header('Access-Control-Allow-Origin', "http://localhost")
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT')
             ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, X-Token-Auth, Authorization');
     }
