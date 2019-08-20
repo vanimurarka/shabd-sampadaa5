@@ -17,8 +17,8 @@ use App\Synset;
 
 //SIMPLE API KEY AUTHENTICATION FROM
 // https://medium.com/@kevincristella/basic-token-based-api-authentication-with-laravel-aeed0050dd0d
-Route::get('/set-urdu/{api_token}', 'DBEnhancer@setUrdu')->middleware('api_token');
-Route::get('/set-english/{api_token}', 'DBEnhancer@setEnglish')->middleware('api_token');
+Route::get('/set-urdu/{api_token}', 'DBEnhancer@setUrdu')->middleware('api_token','cors');
+Route::get('/set-english/{api_token}', 'DBEnhancer@setEnglish')->middleware('api_token','cors');
 Route::get('/word/{api_token}', function(Request $request) 
 {
     $word = $request->input('word');
