@@ -50,7 +50,7 @@ Route::get('/word/{api_token}', function(Request $request)
     }
     return response()->json($data);
 	    
-})->middleware('api_token');
+})->middleware('api_token,cors');
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
